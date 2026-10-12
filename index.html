@@ -450,20 +450,43 @@
         async function initPoster() {
             setImmediateDate();
 
-            // دریافت اطلاعات از کش محلی
+            // ۱. توقف تا دانلود کامل فونت‌ها (Scheherazade New و Vazirmatn)
+            const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+            
+            // ۲. توقف تا بارگذاری کامل عکس پس‌زمینه (bg.jpg)
+            const bgReady = new Promise(resolve => {
+                const img = new Image();
+                img.onload = resolve;
+                img.onerror = resolve; // اگر عکس پیدا نشد، لودینگ گیر نکند
+                img.src = 'bg.jpg';
+            });
+
+            // ۳. دریافت اطلاعات از کش یا سرور
+            let finalData = null;
             const cachedData = localStorage.getItem('quran_baneh_cache');
+            
             if (cachedData) {
-                try { applyPosterData(JSON.parse(cachedData)); } catch (e) {}
+                try { finalData = JSON.parse(cachedData); } catch (e) {}
+                // دریافت تغییرات جدید در پس‌زمینه بدون ایجاد مزاحمت
+                fetch(GOOGLE_API_URL).then(res => res.json()).then(freshData => {
+                    localStorage.setItem('quran_baneh_cache', JSON.stringify(freshData));
+                    applyPosterData(freshData); 
+                }).catch(e => console.error(e));
             }
 
-            // دریافت آخرین اطلاعات از گوگل شیت
-            try {
-                let response = await fetch(GOOGLE_API_URL);
-                let freshData = await response.json();
-                localStorage.setItem('quran_baneh_cache', JSON.stringify(freshData));
-                applyPosterData(freshData);
-            } catch (error) {
-                console.error(error);
+            const dataReady = finalData ? Promise.resolve(finalData) : fetch(GOOGLE_API_URL).then(res => res.json()).catch(() => null);
+
+            // ۴. جادوی نهایی: فانوس را نگه دار تا زمانی که فونت، بک‌گراند و دیتا هر ۳ با هم آماده شوند!
+            const results = await Promise.all([fontsReady, bgReady, dataReady]);
+            
+            const dataToApply = results[2];
+            if (dataToApply) {
+                if (!finalData) localStorage.setItem('quran_baneh_cache', JSON.stringify(dataToApply));
+                applyPosterData(dataToApply); // این تابع لودینگ را مخفی و پوستر را کامل و یکجا نمایش می‌دهد
+            } else {
+                // اگر اینترنت قطع بود و کش هم خالی بود، حداقل لودینگ را بردار تا صفحه خالی نماند
+                document.getElementById('loading-screen').classList.add('hidden');
+                document.getElementById('poster-content').classList.remove('hidden');
             }
         }
 
