@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title data-id="th-modified">پوستر خەتمی قورئان - نسخه نهایی هماهنگ</title>
+    <title data-id="th-modified">پوستر خەتمی قورئان - نسخه نهایی و عریض</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@700&family=Vazirmatn:wght@400;700;900&display=swap');
 
@@ -14,13 +14,16 @@
         }
 
         .poster {
-            direction: rtl; width: 340px; min-height: 560px; 
+            direction: rtl; 
+            width: 360px; /* عرض بیشتر برای کشیده‌تر شدن کادرها */
+            min-height: 560px; 
             background-image: url('bg.webp'); 
-            background-size: 100% 100%; 
-            background-position: center;
+            background-size: cover; 
+            background-position: top center;
             background-repeat: no-repeat;
             position: relative; box-sizing: border-box;
-            padding: 65px 20px 55px 20px; 
+            /* پدینگ پایین (95px) زیاد شد تا کادرها روی قرآن نیفتند */
+            padding: 55px 15px 95px 15px; 
             color: #ffffff; text-align: center;
             box-shadow: 0 15px 50px rgba(0,0,0,0.9);
             overflow: hidden;
@@ -28,7 +31,6 @@
             flex-direction: column;
         }
 
-        /* پوشش دهنده کل محتوای پوستر */
         .poster-content {
             display: flex;
             flex-direction: column; 
@@ -37,62 +39,135 @@
             flex: 1;
         }
 
-        .gold-text { color: gold; }
+        .quran-box {
+            margin-top: 5px; 
+            margin-bottom: 2px;
+        }
 
-        .text-shadow-strong {
-            text-shadow: 0px 2px 5px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 0.9), 0px 0px 15px rgba(0, 0, 0, 0.8);
+        .quran-quote {
+            font-family: 'Scheherazade New', serif;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 1.4;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 255, 255, 0.6), 0px 0px 20px rgba(0, 255, 255, 0.3);
+            display: inline-block;
+        }
+
+        .quote-ref { 
+            font-size: 10.5px; 
+            margin: 3px 0 0 0; 
+            color: #ffdf7a; 
+            font-weight: bold;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
+        }
+
+        .main-title { 
+            font-size: 23px; 
+            font-weight: 900; 
+            margin: 8px 0 0 0; 
+            color: #ffd700; 
+            text-shadow: 
+                0px 3px 6px rgba(0, 0, 0, 1), 
+                0px 0px 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .subtitle-box { 
+            margin: 10px 0 5px 0; /* حاشیه کناری صفر است تا کادر کاملاً کشیده شود */
+            padding: 10px 12px; 
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.55); 
+            backdrop-filter: blur(4px); 
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 215, 0, 0.25); 
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7); 
+            line-height: 1.6;
+        }
+
+        .subtitle-box b {
+            text-shadow: 0 2px 4px rgba(0,0,0,1);
+        }
+        
+        .divider {
+            height: 1px; 
+            background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.5), transparent); 
+            margin: 5px 40px; 
+        }
+
+        .details-box {
+            text-align: right; 
+            margin: 5px 0 0 0; /* حاشیه کناری صفر است */
+            padding: 12px 15px; 
+            border-radius: 14px;
+            background: rgba(0, 0, 0, 0.65); 
+            backdrop-filter: blur(5px); 
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 215, 0, 0.2); 
+            border-top: 1px solid rgba(255, 215, 0, 0.35); 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8); 
+        }
+
+        .details-box p { 
+            margin: 7px 0; 
+            font-size: 13.5px; 
+            display: flex; 
+            align-items: center; 
+            color: #ffffff; 
+            font-weight: bold; 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+        }
+        
+        .details-box .icon { 
+            margin-left: 8px; 
+            font-size: 15px; 
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); 
+        }
+        
+        .masjed-title { 
+            font-size: 11px; 
+            margin-bottom: 2px !important; 
+            color: #ffd700; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+        
+        .masjed-name {
+            font-size: 14.5px !important; 
+            font-weight: 900 !important; 
+            color: #00f0ed !important; 
+            margin-top: 0 !important; 
+            margin-bottom: 6px !important; 
+            padding-right: 22px;
+            line-height: 1.4;
+            text-shadow: 
+                0px 2px 4px #000, 
+                0px 0px 8px rgba(0,0,0,1), 
+                0px 0px 15px rgba(0, 240, 237, 0.2) !important;
+        }
+
+        .telegram { 
+            font-size: 12px; 
+            direction: ltr; 
+            margin-top: 10px; 
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 215, 0, 0.3);
+            text-align: center;
+            color: #ffeb3b; 
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,1);
+        }
+        
+        .tel-icon { 
+            width: 16px; 
+            height: auto; 
+            vertical-align: middle; 
+            margin-right: 5px; 
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.8));
         }
 
         .poster-content > div { position: relative; z-index: 3; }
 
-        .quran-quote {
-            font-family: 'Scheherazade New', serif; 
-            font-size: 20px; 
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .quote-ref { font-size: 11px; margin: 5px 0 0 0; color: #e0e0e0; }
-        
-        .main-title { font-size: 24px; font-weight: 900; margin: 0; color: white; }
-        
-        .subtitle-box { 
-            margin: 12px 15px 5px 15px; padding: 8px 10px; border-radius: 10px;
-            background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
-            border: 1px solid rgba(251, 211, 97, 0.2); border-top: 1px solid rgba(251, 211, 97, 0.4); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6); line-height: 1.6;
-        }
-        
-        .divider {
-            height: 1px; background: linear-gradient(to right, transparent, rgba(251, 211, 97, 0.6), transparent); margin: 0 40px; 
-        }
-
-        .details-box {
-            text-align: right; margin: 0 15px; padding: 12px 15px; border-radius: 10px;
-            background: rgba(0, 0, 0, 0.1); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
-            border: 1px solid rgba(251, 211, 97, 0.2); border-top: 1px solid rgba(251, 211, 97, 0.4); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6); 
-        }
-
-        .details-box p { margin: 6px 0; font-size: 13px; display: flex; align-items: center; color: #ffffff; font-weight: bold; }
-        .details-box .icon { margin-left: 8px; font-size: 14px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); }
-        
-        .masjed-title { font-size: 11px; margin-bottom: 4px !important; }
-        
-        .masjed-name {
-            font-size: 15px !important; font-weight: 900 !important; color: #00d8d6 !important; 
-            margin-top: 0 !important; margin-bottom: 8px !important; padding-right: 22px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important; -webkit-text-stroke: 0.5px #000000; 
-        }
-
-        .footer { margin-top: 0; font-size: 14px; font-weight: bold; }
-        .telegram { font-size: 12px; direction: ltr; margin-top: 5px; margin-bottom: 0; color: #e0e0e0; }
-        .tel-icon { width: 16px; height: auto; vertical-align: middle; margin-right: 5px; }
-
         .hidden { display: none !important; }
         
-        /* استایل لودینگ فانوس */
         .lantern-loader {
             position: absolute;
             top: 50%;
@@ -100,7 +175,6 @@
             transform: translate(-50%, -50%);
             width: 100px;
             z-index: 10;
-            /* تبدیل رنگ مشکی به طلایی و ایجاد هاله نورانی */
             filter: 
                 invert(76%) sepia(43%) saturate(447%) hue-rotate(346deg) brightness(101%) contrast(93%)
                 drop-shadow(0 0 15px rgba(243, 208, 120, 0.8));
@@ -117,53 +191,46 @@
 
     <div class="poster">
         
-        <!-- لودینگ: در ابتدا فقط این فانوس درخشان نمایش داده می‌شود -->
         <img id="loading-screen" src="load.svg" class="lantern-loader" alt="Loading">
         
-        <!-- محتوای اصلی پوستر: در ابتدا مخفی است -->
         <div id="poster-content" class="poster-content hidden">
-            <div class="text-shadow-strong">
-                <div class="quran-quote gold-text">«فَاقْرَءُوا مَا تَيَسَّرَ مِنَ الْقُرْءانِ»</div>
+            
+            <div class="quran-box">
+                <div class="quran-quote">«فَاقْرَءُوا مَا تَيَسَّرَ مِنَ الْقُرْءانِ»</div>
                 <div class="quote-ref">(سورة المزمل: ٢٠)</div>
             </div>
 
-            <div class="text-shadow-strong">
+            <div>
                 <div class="main-title">کۆڕی خەتمی قوڕئانی پیرۆز</div>
                 <div class="subtitle-box">
-                    <div style="font-size: 15px; color: gold;"><b>بۆ هەموو قوڕئاندۆستانی شاری بانە</b></div>
-                    <div style="font-size: 12px; color: #ffeb3b; margin-top: 3px;"><b>بە ئامادەبوونی قوڕئانخوێنە دیارەکانی شار.</b></div>
+                    <div style="font-size: 14.5px; color: #ffd700; font-weight: 900;"><b>بۆ هەموو قوڕئاندۆستانی شاری بانە</b></div>
+                    <div style="font-size: 11.5px; color: #ffffff; margin-top: 4px; font-weight: bold;"><b>بە ئامادەبوونی قوڕئانخوێنە دیارەکانی شار.</b></div>
                 </div>
             </div>
             
             <div class="divider"></div>
 
-            <div class="details-box text-shadow-strong">
-                <div style="font-size:15px; color:gold; text-align:center; margin-bottom:10px;"><b id="p-juz">✨ خوێندنەوەی جوزئی ... ✨</b></div>
-                <p class="masjed-title gold-text"><span class="icon">🕌</span> مزگەوتی میوانداری ئەم هەفتەیە:</p>
+            <div class="details-box">
+                <div style="font-size:15px; color:#ffd700; text-align:center; margin-bottom:8px;"><b id="p-juz">✨ خوێندنەوەی جوزئی ... ✨</b></div>
+                <p class="masjed-title"><span class="icon">🕌</span> مزگەوتی میوانداری ئەم هەفتەیە:</p>
                 <p class="masjed-name" id="p-mosque">...</p>
                 <p><span class="icon">📅</span> ڕێکەوت: <span id="p-date" style="margin-right: 4px;">...</span></p>
                 <p><span class="icon">⏰</span> کات: دوای نوێژی عیشا</p>
                 <p><span class="icon">📖</span> هەموو چوارشەممەیەک ١ جوزء</p>
-            </div>
-
-            <div class="text-shadow-strong">
-                <div class="footer gold-text">🌹 هاتن بۆ هەموو ئیماندارانە 🌹</div>
+                
                 <div class="telegram">
-                    <img src="image_7.png" class="tel-icon"> 
+                    <img src="image_7.png" class="tel-icon" alt="Telegram"> 
                     https://t.me/quran_bane
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 	
     <script>
-        // =====================================================================
-        // ۱. لینک Web App گوگل را اینجا قرار دهید:
         const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbxbJCnY-8cG0ZkdUPlFHCUaI5W3XFX0GV7a5xm_VqjjGxxaQFLebrdsP2mpXdeSyAUphQ/exec";
         
-        // ۲. دیتابیس yearTimes را اینجا قرار دهید:
-        const yearTimes = {"1": { // نەورۆز - خاکەلێوە (فروردین)
+        const yearTimes = {"1": { 
                 "1": ["05:04", "06:35", "12:41", "03:47", "06:45", "07:55"], "2": ["05:03", "06:33", "12:41", "03:48", "06:45", "07:56"],
                 "3": ["05:02", "06:31", "12:41", "03:48", "06:46", "07:56"], "4": ["05:01", "06:30", "12:41", "03:48", "06:46", "07:57"],
                 "5": ["05:00", "06:28", "12:40", "03:48", "06:48", "07:58"], "6": ["04:59", "06:26", "12:40", "03:49", "06:48", "07:59"],
@@ -181,7 +248,7 @@
                 "29": ["04:25", "05:58", "12:36", "03:58", "07:08", "08:18"], "30": ["04:25", "05:58", "12:36", "03:59", "07:08", "08:19"],
                 "31": ["04:23", "05:57", "12:36", "03:59", "07:09", "08:20"]
             },
-            "2": { // گوڵان - بانەمەڕ (اردیبهشت)
+            "2": { 
                 "1": ["04:22", "05:56", "12:36", "04:00", "07:10", "08:21"], "2": ["04:21", "05:55", "12:36", "04:00", "07:11", "08:22"],
                 "3": ["04:20", "05:54", "12:36", "04:00", "07:12", "08:23"], "4": ["04:18", "05:52", "12:35", "04:00", "07:13", "08:24"],
                 "5": ["04:17", "05:51", "12:35", "04:01", "07:14", "08:25"], "6": ["04:15", "05:50", "12:35", "04:01", "07:15", "08:26"],
@@ -199,7 +266,7 @@
                 "29": ["03:41", "05:23", "12:30", "04:07", "07:34", "08:49"], "30": ["03:40", "05:21", "12:30", "04:08", "07:34", "08:50"],
                 "31": ["03:39", "05:21", "12:30", "04:08", "07:34", "08:51"]
             },
-            "3": { // جۆزەردان (خرداد)
+            "3": { 
                 "1": ["03:38", "05:21", "12:30", "04:08", "07:35", "08:52"], "2": ["03:38", "05:20", "12:30", "04:09", "07:36", "08:53"],
                 "3": ["03:37", "05:20", "12:30", "04:10", "07:37", "08:54"], "4": ["03:36", "05:19", "12:31", "04:11", "07:38", "08:55"],
                 "5": ["03:36", "05:19", "12:31", "04:12", "07:39", "08:56"], "6": ["03:35", "05:18", "12:31", "04:13", "07:40", "08:57"],
@@ -217,7 +284,7 @@
                 "29": ["03:25", "05:14", "12:39", "04:26", "07:54", "09:20"], "30": ["03:25", "05:14", "12:40", "04:27", "07:55", "09:21"],
                 "31": ["03:25", "05:14", "12:40", "04:27", "07:55", "09:22"]
             },
-            "4": { // پووشپەڕ (تیر)
+            "4": { 
                 "1": ["03:25", "05:14", "12:40", "04:27", "07:55", "09:22"], "2": ["03:26", "05:15", "12:40", "04:27", "07:56", "09:21"],
                 "3": ["03:27", "05:16", "12:41", "04:28", "07:56", "09:21"], "4": ["03:28", "05:17", "12:41", "04:28", "07:57", "09:20"],
                 "5": ["03:29", "05:18", "12:41", "04:29", "07:57", "09:20"], "6": ["03:30", "05:19", "12:42", "04:29", "07:57", "09:19"],
@@ -235,7 +302,7 @@
                 "29": ["03:48", "05:34", "12:48", "04:28", "07:48", "09:04"], "30": ["03:49", "05:35", "12:48", "04:27", "07:46", "09:04"],
                 "31": ["03:49", "05:35", "12:48", "04:27", "07:46", "09:03"]
             },
-            "5": { // خەرمانان (مرداد)
+            "5": { 
                 "1": ["03:49", "05:35", "12:48", "04:27", "07:46", "09:03"], "2": ["03:50", "05:36", "12:48", "04:26", "07:46", "09:03"],
                 "3": ["03:51", "05:36", "12:48", "04:26", "07:45", "09:02"], "4": ["03:52", "05:37", "12:48", "04:25", "07:45", "09:02"],
                 "5": ["03:53", "05:37", "12:48", "04:24", "07:44", "09:01"], "6": ["03:54", "05:38", "12:48", "04:24", "07:44", "09:00"],
@@ -253,7 +320,7 @@
                 "29": ["04:16", "05:54", "12:44", "04:06", "07:24", "08:34"], "30": ["04:16", "05:55", "12:44", "04:06", "07:23", "08:33"],
                 "31": ["04:17", "05:55", "12:44", "04:05", "07:22", "08:32"]
             },
-            "6": { // گەلاوێژ (شهریور)
+            "6": { 
                 "1": ["04:17", "05:56", "12:44", "04:05", "07:21", "08:32"], "2": ["04:18", "05:56", "12:44", "04:04", "07:20", "08:30"],
                 "3": ["04:19", "05:57", "12:44", "04:04", "07:19", "08:28"], "4": ["04:20", "05:58", "12:44", "04:03", "07:18", "08:26"],
                 "5": ["04:21", "05:59", "12:43", "04:03", "07:17", "08:24"], "6": ["04:22", "06:00", "12:43", "04:02", "07:16", "08:22"],
@@ -271,7 +338,7 @@
                 "29": ["04:53", "06:18", "12:34", "03:45", "06:38", "07:48"], "30": ["04:54", "06:18", "12:34", "03:44", "06:37", "07:47"],
                 "31": ["04:55", "06:19", "12:34", "03:44", "06:36", "07:46"]
             },
-            "7": { // ڕەزبەر (مهر)
+            "7": { 
                 "1": ["04:56", "06:19", "12:34", "03:43", "06:35", "07:44"], "2": ["04:57", "06:20", "12:34", "03:42", "06:34", "07:42"],
                 "3": ["04:57", "06:20", "12:33", "03:41", "06:32", "07:41"], "4": ["04:58", "06:21", "12:33", "03:40", "06:31", "07:40"],
                 "5": ["04:59", "06:21", "12:33", "03:39", "06:29", "07:38"], "6": ["05:00", "06:22", "12:32", "03:38", "06:28", "07:36"],
@@ -288,7 +355,7 @@
                 "27": ["05:19", "06:36", "12:26", "03:19", "05:59", "07:09"], "28": ["05:20", "06:36", "12:26", "03:19", "05:58", "07:08"],
                 "29": ["05:21", "06:37", "12:26", "03:18", "05:57", "07:07"], "30": ["05:21", "06:37", "12:25", "03:17", "05:57", "07:06"]
             },
-            "8": { // گەڵاڕێزان - خەزەڵوەر (آبان)
+            "8": { 
                 "1": ["05:22", "06:38", "12:25", "03:16", "05:56", "07:05"], "2": ["05:23", "06:39", "12:25", "03:16", "05:54", "07:04"],
                 "3": ["05:23", "06:40", "12:25", "03:15", "05:53", "07:03"], "4": ["05:24", "06:42", "12:25", "03:15", "05:52", "07:02"],
                 "5": ["05:25", "06:43", "12:26", "03:14", "05:51", "07:01"], "6": ["05:26", "06:44", "12:26", "03:13", "05:49", "07:00"],
@@ -305,7 +372,7 @@
                 "27": ["05:43", "07:05", "12:28", "03:02", "05:30", "06:40"], "28": ["05:44", "07:06", "12:28", "03:01", "05:30", "06:39"],
                 "29": ["05:45", "07:07", "12:28", "03:01", "05:29", "06:39"], "30": ["05:45", "07:08", "12:28", "03:01", "05:29", "06:38"]
             },
-            "9": { // سەرماوەز (آذر)
+            "9": { 
                 "1": ["05:45", "07:09", "12:28", "03:00", "05:28", "06:38"], "2": ["05:46", "07:10", "12:28", "03:00", "05:28", "06:37"],
                 "3": ["05:46", "07:11", "12:28", "02:59", "05:27", "06:37"], "4": ["05:46", "07:12", "12:28", "02:59", "05:27", "06:36"],
                 "5": ["05:47", "07:13", "12:28", "02:59", "05:26", "06:36"], "6": ["05:47", "07:14", "12:28", "02:58", "05:26", "06:35"],
@@ -322,7 +389,7 @@
                 "27": ["05:56", "07:32", "12:30", "02:54", "05:22", "06:33"], "28": ["05:56", "07:32", "12:30", "02:54", "05:23", "06:34"],
                 "29": ["05:57", "07:33", "12:30", "02:54", "05:23", "06:34"], "30": ["05:57", "07:33", "12:31", "02:54", "05:24", "06:34"]
             },
-            "10": { // بەفرانبار (دی)
+            "10": { 
                 "1": ["05:58", "07:33", "12:31", "02:55", "05:24", "06:35"], "2": ["05:58", "07:33", "12:31", "02:55", "05:25", "06:35"],
                 "3": ["05:59", "07:34", "12:31", "02:56", "05:25", "06:36"], "4": ["05:59", "07:34", "12:32", "02:56", "05:26", "06:36"],
                 "5": ["06:00", "07:34", "12:32", "02:57", "05:26", "06:37"], "6": ["06:00", "07:35", "12:32", "02:57", "05:27", "06:37"],
@@ -339,7 +406,7 @@
                 "27": ["06:03", "07:36", "12:40", "03:14", "05:43", "06:53"], "28": ["06:03", "07:36", "12:40", "03:15", "05:44", "06:54"],
                 "29": ["06:03", "07:35", "12:40", "03:16", "05:45", "06:55"], "30": ["06:03", "07:35", "12:40", "03:17", "05:46", "06:56"]
             },
-            "11": { // ڕێبەندان (بهمن)
+            "11": { 
                 "1": ["06:03", "07:34", "12:41", "03:17", "05:47", "06:56"], "2": ["06:02", "07:34", "12:41", "03:18", "05:48", "06:57"],
                 "3": ["06:02", "07:33", "12:42", "03:19", "05:49", "06:58"], "4": ["06:02", "07:33", "12:42", "03:20", "05:51", "06:59"],
                 "5": ["06:01", "07:32", "12:42", "03:21", "05:53", "07:00"], "6": ["06:01", "07:32", "12:43", "03:22", "05:54", "07:01"],
@@ -356,7 +423,7 @@
                 "27": ["05:45", "07:12", "12:46", "03:38", "06:16", "07:22"], "28": ["05:44", "07:11", "12:45", "03:39", "06:16", "07:23"],
                 "29": ["05:43", "07:10", "12:45", "03:39", "06:17", "07:24"], "30": ["05:42", "07:09", "12:45", "03:40", "06:18", "07:25"]
             },
-            "12": { // ڕەشەمە (اسفند - کامل ۳۰ روزه برای سال‌های کبیسه)
+            "12": { 
                 "1": ["05:39", "07:09", "12:45", "03:40", "06:19", "07:29"], "2": ["05:37", "07:08", "12:45", "03:40", "06:20", "07:28"],
                 "3": ["05:36", "07:07", "12:44", "03:40", "06:21", "07:29"], "4": ["05:35", "07:06", "12:44", "03:41", "06:21", "07:31"],
                 "5": ["05:34", "07:05", "12:44", "03:41", "06:22", "07:32"], "6": ["05:32", "07:04", "12:44", "03:41", "06:23", "07:34"],
@@ -373,7 +440,6 @@
                 "27": ["05:08", "06:41", "12:40", "03:46", "06:42", "07:53"], "28": ["05:07", "06:39", "12:40", "03:47", "06:43", "07:54"],
                 "29": ["05:06", "06:38", "12:41", "03:47", "06:44", "07:54"], "30": ["05:05", "06:37", "12:41", "03:47", "06:45", "07:55"]
             }};
-        // =====================================================================
 
         function toPersianNum(str) {
             if (str === null || str === undefined) return '';
@@ -404,7 +470,6 @@
             let resetTime = new Date(target);
             resetTime.setHours(ishaHour24 + 2, parseInt(min, 10), 0, 0);
 
-            // دقیقاً ۲ ساعت بعد از اذان عشا، برو به چهارشنبه بعدی
             if (now.getTime() >= resetTime.getTime()) {
                 target.setDate(target.getDate() + 7);
                 parts = formatter.formatToParts(target);
@@ -423,7 +488,6 @@
 
         function applyPosterData(data) {
             let startD = new Date(data.startDate);
-            // سیستم ضدضربه تاریخ
             if (isNaN(startD.getTime())) {
                 startD = new Date("2026-10-07T00:00:00");
             }
@@ -437,12 +501,10 @@
             let finalJuz = (!isNaN(manualJuzNum) && manualJuzNum >= 1 && manualJuzNum <= 30) ? manualJuzNum : calculatedJuz;
             let juzWordKu = kurdishOrdinals[finalJuz - 1] || toPersianNum(finalJuz);
 
-            // اعمال اطلاعات در صفحه
             document.getElementById('p-juz').innerText = `✨ خوێندنەوەی جوزئی ${juzWordKu} ✨`;
             document.getElementById('p-mosque').innerText = data.mosque || "مزگەوتی دیاریکراو";
             document.getElementById('p-date').innerText = toPersianNum(`چوارشەممە، ${wed.day}ی ${kurdishMonths[wed.month]}ی ${wed.year}`);
 
-            // پنهان کردن لودینگ فانوس و نمایش اطلاعات کامل پوستر
             document.getElementById('loading-screen').classList.add('hidden');
             document.getElementById('poster-content').classList.remove('hidden');
         }
@@ -450,24 +512,20 @@
         async function initPoster() {
             setImmediateDate();
 
-            // ۱. توقف تا دانلود کامل فونت‌ها (Scheherazade New و Vazirmatn)
             const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
             
-            // ۲. توقف تا بارگذاری کامل عکس پس‌زمینه (bg.jpg)
             const bgReady = new Promise(resolve => {
                 const img = new Image();
                 img.onload = resolve;
-                img.onerror = resolve; // اگر عکس پیدا نشد، لودینگ گیر نکند
-                img.src = 'bg.jpg';
+                img.onerror = resolve; 
+                img.src = '1.jpg';   
             });
 
-            // ۳. دریافت اطلاعات از کش یا سرور
             let finalData = null;
             const cachedData = localStorage.getItem('quran_baneh_cache');
             
             if (cachedData) {
                 try { finalData = JSON.parse(cachedData); } catch (e) {}
-                // دریافت تغییرات جدید در پس‌زمینه بدون ایجاد مزاحمت
                 fetch(GOOGLE_API_URL).then(res => res.json()).then(freshData => {
                     localStorage.setItem('quran_baneh_cache', JSON.stringify(freshData));
                     applyPosterData(freshData); 
@@ -476,15 +534,13 @@
 
             const dataReady = finalData ? Promise.resolve(finalData) : fetch(GOOGLE_API_URL).then(res => res.json()).catch(() => null);
 
-            // ۴. جادوی نهایی: فانوس را نگه دار تا زمانی که فونت، بک‌گراند و دیتا هر ۳ با هم آماده شوند!
             const results = await Promise.all([fontsReady, bgReady, dataReady]);
             
             const dataToApply = results[2];
             if (dataToApply) {
                 if (!finalData) localStorage.setItem('quran_baneh_cache', JSON.stringify(dataToApply));
-                applyPosterData(dataToApply); // این تابع لودینگ را مخفی و پوستر را کامل و یکجا نمایش می‌دهد
+                applyPosterData(dataToApply); 
             } else {
-                // اگر اینترنت قطع بود و کش هم خالی بود، حداقل لودینگ را بردار تا صفحه خالی نماند
                 document.getElementById('loading-screen').classList.add('hidden');
                 document.getElementById('poster-content').classList.remove('hidden');
             }
