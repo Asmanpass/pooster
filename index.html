@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title data-id="th-modified">پوستر خەتمی قورئان - نسخه نهایی و عریض</title>
+    <title>پوستر خەتمی قورئان - نسخه هوشمند و نهایی</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@700&family=Vazirmatn:wght@400;700;900&display=swap');
+        /* فراخوانی فونت وزیرمتن */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap');
 
         body {
             margin: 0; padding: 0; background-color: #111111;
@@ -13,167 +14,77 @@
             min-height: 100vh; font-family: 'Vazirmatn', sans-serif;
         }
 
-        .poster {
-            direction: rtl; 
-            width: 360px; /* عرض بیشتر برای کشیده‌تر شدن کادرها */
-            min-height: 560px; 
-            background-image: url('bg.webp'); 
-            background-size: cover; 
-            background-position: top center;
-            background-repeat: no-repeat;
-            position: relative; box-sizing: border-box;
-            /* پدینگ پایین (95px) زیاد شد تا کادرها روی قرآن نیفتند */
-            padding: 55px 15px 95px 15px; 
-            color: #ffffff; text-align: center;
+        /* ظرف اصلی برای مقیاس‌پذیری و ثابت ماندن متن‌ها در همه گوشی‌ها */
+        .poster-container {
+            width: 100%;
+            max-width: 400px; /* عرض بهینه پوستر */
+            container-type: inline-size; /* برای تغییر سایز فونت متناسب با عکس */
+            position: relative;
             box-shadow: 0 15px 50px rgba(0,0,0,0.9);
+        }
+
+        /* تنظیمات عکس خام پوستر */
+        .poster {
+            width: 100%;
+            aspect-ratio: 3 / 4; /* تناسب دقیق ابعاد عکس فتوشاپ شما */
+            background-image: url('bg-blank.webp'); /* عکس بدون متن و کم‌حجم شما */
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            direction: rtl;
         }
 
-        .poster-content {
-            display: flex;
-            flex-direction: column; 
-            justify-content: space-between;
-            height: 100%;
-            flex: 1;
-        }
-
-        .quran-box {
-            margin-top: 5px; 
-            margin-bottom: 2px;
-        }
-
-        .quran-quote {
-            font-family: 'Scheherazade New', serif;
-            font-size: 22px;
-            font-weight: bold;
-            color: #ffffff;
-            line-height: 1.4;
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 255, 255, 0.6), 0px 0px 20px rgba(0, 255, 255, 0.3);
-            display: inline-block;
-        }
-
-        .quote-ref { 
-            font-size: 10.5px; 
-            margin: 3px 0 0 0; 
-            color: #ffdf7a; 
-            font-weight: bold;
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
-        }
-
-        .main-title { 
-            font-size: 26px; 
-            font-weight: 900; 
-            margin: 8px 0 0 0; 
-            color: #ffd700; 
-            text-shadow: 
-                0px 3px 6px rgba(0, 0, 0, 1), 
-                0px 0px 15px rgba(255, 215, 0, 0.5);
-        }
-        
-        .subtitle-box { 
-            margin: 10px 0 5px 0; /* حاشیه کناری صفر است تا کادر کاملاً کشیده شود */
-            padding: 10px 12px; 
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.55); 
-            backdrop-filter: blur(4px); 
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 215, 0, 0.25); 
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7); 
-            line-height: 1.6;
-        }
-
-        .subtitle-box b {
-            text-shadow: 0 2px 4px rgba(0,0,0,1);
-        }
-        
-        .divider {
-            height: 1px; 
-            background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.5), transparent); 
-            margin: 5px 40px; 
-        }
-
-        .details-box {
-            text-align: right; 
-            margin: 5px 0 0 0; /* حاشیه کناری صفر است */
-            padding: 12px 15px; 
-            border-radius: 14px;
-            background: rgba(0, 0, 0, 0.65); 
-            backdrop-filter: blur(5px); 
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 215, 0, 0.2); 
-            border-top: 1px solid rgba(255, 215, 0, 0.35); 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8); 
-        }
-
-        .details-box p { 
-            margin: 7px 0; 
-            font-size: 13.5px; 
-            display: flex; 
-            align-items: center; 
-            color: #ffffff; 
-            font-weight: bold; 
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
-        }
-        
-        .details-box .icon { 
-            margin-left: 8px; 
-            font-size: 15px; 
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); 
-        }
-        
-        .masjed-title { 
-            font-size: 11px; 
-            margin-bottom: 2px !important; 
-            color: #ffd700; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-        }
-        
-        .masjed-name {
-            font-size: 14.5px !important; 
-            font-weight: 900 !important; 
-            color: #00f0ed !important; 
-            margin-top: 0 !important; 
-            margin-bottom: 6px !important; 
-            padding-right: 22px;
-            line-height: 1.4;
-            text-shadow: 
-                0px 2px 4px #000, 
-                0px 0px 8px rgba(0,0,0,1), 
-                0px 0px 15px rgba(0, 240, 237, 0.2) !important;
-        }
-
-        .telegram { 
-            font-size: 12px; 
-            direction: ltr; 
-            margin-top: 10px; 
-            padding-top: 8px;
-            border-top: 1px dashed rgba(255, 215, 0, 0.3);
+        /* استایل مشترک برای تمام متن‌ها */
+        .dynamic-text {
+            position: absolute;
+            left: 0; right: 0;
             text-align: center;
-            color: #ffeb3b; 
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0,0,0,1);
-        }
-        
-        .tel-icon { 
-            width: 16px; 
-            height: auto; 
-            vertical-align: middle; 
-            margin-right: 5px; 
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.8));
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        .poster-content > div { position: relative; z-index: 3; }
+        /* ۱. تنظیمات متن جزء */
+        .juz-text {
+            top: 68%; 
+            font-size: 3cqi; /* فونت متناسب با عرض پوستر */
+            font-weight: 900;
+        }
+
+        /* ۲. تنظیمات متن مسجد */
+        .mosque-text {
+            top: 81%; 
+            font-size: 3.25cqi; 
+            font-weight: 700;
+            padding: 0 5%;
+            line-height: 1.4;
+        }
+
+        /* ۳. تنظیمات متن تاریخ و ساعت */
+        .date-time-text {
+            top: 87.6%; 
+            font-size: 2cqi; /* سایز فونت کوچکتر شد تا در کادر جا شود */
+            font-weight: 700;
+            line-height: 1.8; /* فاصله بین تاریخ و عبارت نماز عشا */
+            color: #e0e0e0;
+        }
+
+        /* کادر نامرئی برای راست‌چین کردن ایموجی‌ها در مرکز */
+        .date-time-wrapper {
+            display: inline-block;
+            text-align: right;
+        }
 
         .hidden { display: none !important; }
         
+        /* انیمیشن فانوس طلایی برای لودینگ */
         .lantern-loader {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px;
+            width: 25cqi; /* عرض داینامیک برای فانوس */
             z-index: 10;
             filter: 
                 invert(76%) sepia(43%) saturate(447%) hue-rotate(346deg) brightness(101%) contrast(93%)
@@ -189,38 +100,25 @@
 </head>
 <body>
 
-    <div class="poster">
-        
-        <img id="loading-screen" src="load.svg" class="lantern-loader" alt="Loading">
-        
-        <div id="poster-content" class="poster-content hidden">
+    <div class="poster-container">
+        <div class="poster">
             
-            <div class="quran-box">
-                <div class="quran-quote">«فَاقْرَءُوا مَا تَيَسَّرَ مِنَ الْقُرْءانِ»</div>
-                <div class="quote-ref">(سورة المزمل: ٢٠)</div>
-            </div>
-
-            <div>
-                <div class="main-title">کۆڕی خەتمی قوڕئانی پیرۆز</div>
-                <div class="subtitle-box">
-                    <div style="font-size: 16.5px; color: #ffd700; font-weight: 900;"><b>بۆ هەموو قوڕئاندۆستانی شاری بانە</b></div>
-                    <div style="font-size: 13.5px; color: #ffffff; margin-top: 4px; font-weight: bold;"><b>بە ئامادەبوونی قوڕئانخوێنە دیارەکانی شار.</b></div>
-                </div>
-            </div>
+            <!-- تصویر فانوس به جای متن لودینگ -->
+            <img id="loading-screen" src="load.svg" class="lantern-loader" alt="Loading">
             
-            <div class="divider"></div>
-
-            <div class="details-box">
-                <div style="font-size:15px; color:#ffd700; text-align:center; margin-bottom:8px;"><b id="p-juz">✨ خوێندنەوەی جوزئی ... ✨</b></div>
-                <p class="masjed-title"><span class="icon">🕌</span> مزگەوتی میوانداری ئەم هەفتەیە:</p>
-                <p class="masjed-name" id="p-mosque">...</p>
-                <p><span class="icon">📅</span> ڕێکەوت: <span id="p-date" style="margin-right: 4px;">...</span></p>
-                <p><span class="icon">⏰</span> کات: دوای نوێژی عیشا</p>
-                <p><span class="icon">📖</span> هەموو چوارشەممەیەک ١ جوزء</p>
+            <div id="content" class="hidden">
+                <!-- ۱. بخش جزء -->
+                <div id="p-juz" class="dynamic-text juz-text">تیلاوەتی جوزئی ...</div>
                 
-                <div class="telegram">
-                    <img src="image_7.png" class="tel-icon" alt="Telegram"> 
-                    https://t.me/quran_bane
+                <!-- ۲. بخش مسجد -->
+                <div id="p-mosque" class="dynamic-text mosque-text">مزگەوتی دیاریکراو...</div>
+                
+                <!-- ۳. بخش تاریخ و ساعت (همراه با ایموجی و راست‌چین شده) -->
+                <div class="dynamic-text date-time-text">
+                    <div class="date-time-wrapper">
+                        <div id="p-date">📅 چوارشەممە ...</div>
+                        <div id="p-time">⏰ دوای نوێژی عیشا</div>
+                    </div>
                 </div>
             </div>
 
@@ -462,14 +360,17 @@
             let m = parts.find(p=>p.type==='month').value;
             let d = parts.find(p=>p.type==='day').value;
 
+            // پیدا کردن زمان دقیق نماز عشا از آرایه
             let isha = (yearTimes[m] && yearTimes[m][d]) ? yearTimes[m][d][5] : "19:30"; 
             let [h, min] = isha.split(':');
             let ishaHour24 = parseInt(h, 10);
-            if (ishaHour24 < 12) ishaHour24 += 12;
+            if (ishaHour24 < 12) ishaHour24 += 12; // تبدیل به فرمت 24 ساعته
             
+            // زمان ریست شدن پوستر (2 ساعت بعد از اذان عشا)
             let resetTime = new Date(target);
             resetTime.setHours(ishaHour24 + 2, parseInt(min, 10), 0, 0);
 
+            // اگر الان از 2 ساعت بعد از عشای چهارشنبه گذشته باشد، تاریخ را می‌اندازد چهارشنبه هفته بعد
             if (now.getTime() >= resetTime.getTime()) {
                 target.setDate(target.getDate() + 7);
                 parts = formatter.formatToParts(target);
@@ -481,12 +382,8 @@
             return { targetObj: target, year: y, month: m, day: d };
         }
 
-        function setImmediateDate() {
-            let wed = getNextWedForPoster();
-            document.getElementById('p-date').innerText = toPersianNum(`چوارشەممە، ${wed.day}ی ${kurdishMonths[wed.month]}ی ${wed.year}`);
-        }
-
         function applyPosterData(data) {
+            // محاسبه جزء (منطق پویا)
             let startD = new Date(data.startDate);
             if (isNaN(startD.getTime())) {
                 startD = new Date("2026-10-07T00:00:00");
@@ -501,26 +398,21 @@
             let finalJuz = (!isNaN(manualJuzNum) && manualJuzNum >= 1 && manualJuzNum <= 30) ? manualJuzNum : calculatedJuz;
             let juzWordKu = kurdishOrdinals[finalJuz - 1] || toPersianNum(finalJuz);
 
-            document.getElementById('p-juz').innerText = `✨ خوێندنەوەی جوزئی ${juzWordKu} ✨`;
+            // اعمال اطلاعات در صفحه (همراه با ایموجی‌ها)
+            document.getElementById('p-juz').innerText = `تیلاوەتی جوزئی ${juzWordKu}`;
             document.getElementById('p-mosque').innerText = data.mosque || "مزگەوتی دیاریکراو";
-            document.getElementById('p-date').innerText = toPersianNum(`چوارشەممە، ${wed.day}ی ${kurdishMonths[wed.month]}ی ${wed.year}`);
+            document.getElementById('p-date').innerText = toPersianNum(`📅 چوارشەممە ${wed.day}ی ${kurdishMonths[wed.month]}ی ${wed.year}`);
 
+            // پنهان کردن آیکون لودینگ و نمایش متن‌ها
             document.getElementById('loading-screen').classList.add('hidden');
-            document.getElementById('poster-content').classList.remove('hidden');
+            document.getElementById('content').classList.remove('hidden');
         }
 
         async function initPoster() {
-            setImmediateDate();
-
-            const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+            // نمایش موقت تاریخ قبل از دریافت اطلاعات سرور
+            let wed = getNextWedForPoster();
+            document.getElementById('p-date').innerText = toPersianNum(`📅 چوارشەممە ${wed.day}ی ${kurdishMonths[wed.month]}ی ${wed.year}`);
             
-            const bgReady = new Promise(resolve => {
-                const img = new Image();
-                img.onload = resolve;
-                img.onerror = resolve; 
-                img.src = '1.jpg';   
-            });
-
             let finalData = null;
             const cachedData = localStorage.getItem('quran_baneh_cache');
             
@@ -532,17 +424,16 @@
                 }).catch(e => console.error(e));
             }
 
-            const dataReady = finalData ? Promise.resolve(finalData) : fetch(GOOGLE_API_URL).then(res => res.json()).catch(() => null);
-
-            const results = await Promise.all([fontsReady, bgReady, dataReady]);
-            
-            const dataToApply = results[2];
-            if (dataToApply) {
-                if (!finalData) localStorage.setItem('quran_baneh_cache', JSON.stringify(dataToApply));
-                applyPosterData(dataToApply); 
+            if (finalData) {
+                applyPosterData(finalData);
             } else {
-                document.getElementById('loading-screen').classList.add('hidden');
-                document.getElementById('poster-content').classList.remove('hidden');
+                fetch(GOOGLE_API_URL).then(res => res.json()).then(data => {
+                    localStorage.setItem('quran_baneh_cache', JSON.stringify(data));
+                    applyPosterData(data);
+                }).catch(e => {
+                    document.getElementById('loading-screen').classList.add('hidden');
+                    document.getElementById('content').classList.remove('hidden');
+                });
             }
         }
 
