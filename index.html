@@ -303,7 +303,7 @@
     };
     fetch("https://script.google.com/macros/s/AKfycbwz9ya2jZnD6kaFtcy1hJuZE8Lyz9_fSTGlc7AvYCar868pE3M6UcUTaVVJRF_DR2SHSQ/exec", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(logData)
     }).catch(e => console.log("Error logging"));
   }
